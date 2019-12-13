@@ -60,10 +60,22 @@ const accountSchema = new Schema({
     occupation:[{ type: Schema.Types.ObjectId, ref: 'Occupation' }],
     insurance:[{ type: Schema.Types.ObjectId, ref: 'insurance' }],
     bank:[{ type: Schema.Types.ObjectId, ref: 'Bank' }],
-    assets:[{ type: Schema.Types.ObjectId, ref: 'Assets' }],
-    social_media:[{ type: Schema.Types.ObjectId, ref: 'Social_media' }],
-    file_upload:[{ type: Schema.Types.ObjectId, ref: 'File_upload' }],
-    relative:[{type:Schema.Types.ObjectId, ref:" Person"}]
+    assets:[{ type: Schema.Types.ObjectId, ref: 'Assets'
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+ }],
+    social_media:[{ type: Schema.Types.ObjectId, ref: 'S
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+ocial_media' }],
+    file_upload:[{ type: Schema.Types.ObjectId, ref: 'Fi
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+le_upload' }],
+    relative:[{type:Schema.Types.ObjectId, ref:" Person"
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+}]
 });
 
 
