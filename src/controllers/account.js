@@ -48,6 +48,13 @@ exports.create_account = (req,res,next)=>{
 exports.get_account = (req,res,next)=>{
     Account
     .find()
+    .populate("family")
+    .populate("occupation")
+    .populate("insurance")
+    .populate("bank")
+    .populate("assets")
+    .populate("social_media")
+    .populate("file_upload")
     .then(result=>{
         res.status(200).json(result)
     })

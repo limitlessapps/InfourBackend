@@ -21,5 +21,5 @@ const assetSchema = new Schema({
 });
 
 
-const Asset = mongoose.model("Asset",assetSchema);
-module.exports = Asset;
+const Assets = mongoose.model("Assets",assetSchema);
+module.exports = Assets;
