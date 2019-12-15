@@ -18,7 +18,8 @@ const accountSchema = new Schema({
         type:String
     },
     sex:{
-        type:String
+        type:String,
+        enum:["male","female"]
     },
     nationality:{
         type:String
@@ -56,7 +57,7 @@ const accountSchema = new Schema({
     secondary_number:{
         type:String
     },
-    family:[{ type: Schema.Types.ObjectId, ref: 'Family' }],
+    family:{ type: Schema.Types.ObjectId, ref: 'Family' },
     occupation:[{ type: Schema.Types.ObjectId, ref: 'Occupation' }],
     insurance:[{ type: Schema.Types.ObjectId, ref: 'insurance' }],
     bank:[{ type: Schema.Types.ObjectId, ref: 'Bank' }],

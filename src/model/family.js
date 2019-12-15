@@ -26,8 +26,8 @@ const familySchema = new Schema({
     spouseTelephone:{
         type:String
     },
-    children_number:{
-        type:String
+    children:{
+        type:[String]
     },
     Dependency:{
         type:String

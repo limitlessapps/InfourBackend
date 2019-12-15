@@ -2,24 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const social_mediaSchema = new Schema({
-    profile:{
+    twitter:{
         type:String
     },
-    national_id_file:{
+    facebook:{
         type:String
     },
-    land_file:{
+    instagram:{
         type:String
     },
-    marriage_certificate:{
+    linkedin:{
         type:String
     },
-    birth_certificate:{
+    whatsup_number:{
         type:String
-    },
-    other_relevant_file:[String]
-});
+    }
+    });
 
 
-const Social_Media = mongoose.model("Files",social_mediaSchema);
+const Social_Media = mongoose.model("Social_Media",social_mediaSchema);
+
 module.exports = Social_Media;

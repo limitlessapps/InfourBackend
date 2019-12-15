@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const cors = require("cors");
+const Routes = require('./src/routes/route')
 
 // ======================================================== middlewares
 app.use(morgan('dev'));
@@ -13,9 +14,11 @@ app.use(bodyParser.json({limit:'10mb',extended:true}))
 app.use(cors());
 
 // =========================================================== routes;
-app.use("/",(req,res)=>{
+app.use("/welcome",(req,res)=>{
     res.status(200).send('welcome')
 });
+
+app.use('/api',Routes);
 //=========================================================== connect mongdb;
 
 mongoose.connect('mongodb://localhost:27017/Infour',

@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const assetSchema = new Schema({
-    asset_name:{
-        type:[String]
+
+const student_Schema = new Schema( {
+    school:{
+        type:String
     },
     country:{
         type:String
@@ -17,9 +18,8 @@ const assetSchema = new Schema({
     street:{
         type:String
     }
-
 });
 
 
-const Asset = mongoose.model("Asset",assetSchema);
-module.exports = Asset;
+const Student = mongoose.model("Student",student_Schema);
+module.exports = Student;
