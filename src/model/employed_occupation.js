@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const assetSchema = new Schema({
-    asset_name:{
-        type:[String]
+
+const employed_Schema = new Schema({
+    company_name:{
+        type:String
+    },
+    position:{
+        type:String
     },
     country:{
         type:String
@@ -15,11 +19,10 @@ const assetSchema = new Schema({
         type:String
     },
     street:{
-        type:String
+          type:String
     }
-
 });
 
 
-const Asset = mongoose.model("Asset",assetSchema);
-module.exports = Asset;
+const Employed = mongoose.model("Employed",employed_Schema);
+module.exports = Employed;
