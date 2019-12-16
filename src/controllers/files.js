@@ -1,14 +1,14 @@
 const Files = require("../model/files");
+const config = require("../../config");
 
 exports.create_files =(req,res,next)=>{
- const files = new Files({
-       profile:req.body.profile,
-       national_id_files:req.body.national_id_files,
-       land_file:req.body.land_file,
-       marriage_file:req.body.marriage_file,
-       birth_certificate:req.body.birth_certificate,
-       other_relevant_files:req.body.other_relevant_files
- });
+
+    const file = req.files.profile;
+    config.cloudinary.uploader.upload(file.tempFilePath,function(err,result){
+    const files = new Files({
+       value: console.log("Result: ",result),
+        profile:result.url
+        });
 
  files
  .save()
@@ -20,5 +20,8 @@ exports.create_files =(req,res,next)=>{
          error:err
      });
  })
+
+    });
+ 
 
 }
