@@ -11,6 +11,9 @@ const Student = require("../controllers/student_occupation");
 const Employed = require("../controllers/employed_occupation");
 const Self_employed = require("../controllers/self_employed_occupation");
 const Occupation = require("../controllers/occupation");
+const fileController = require("../controllers/fileHandling");
+
+
 // =================================================account
 router.post("/account",AccountController.create_account);
 router.get("/account",AccountController.get_account);
@@ -31,6 +34,7 @@ router.post("/occupation",Occupation.create_occupation);
 //======================================================= social_media
 router.post("/social_media",Social_media.create_social_media);
 //====================================================== Files 
-router.post("/files",Files.create_files);
-
+router.post("/files_doc",Files.create_files);
+//====================================================== files;
+// router.post("/files",fileController.uploadFile);
 module.exports = router;
