@@ -18,3 +18,21 @@ exports.create_bank_name =(req,res,next)=>{
  })
 
 }
+
+
+
+exports.delete_bank = (req,res,next)=>{
+        Bank.deleteOne({_id:req.params.id})
+    .then( deletedData=>{
+        res.status(200).json({
+            message:"data successfully deleted",
+            data:deletedData
+        })
+    }).catch(
+      error =>{
+          res.status(400).json({
+              error:error
+          })
+      }
+  )
+  }

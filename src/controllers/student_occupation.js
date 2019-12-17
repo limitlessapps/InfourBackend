@@ -22,3 +22,23 @@ exports.create_Student_occupation =(req,res,next)=>{
  })
 
 }
+
+
+
+
+
+exports.delete_student_occupation = (req,res,next)=>{
+      Student.deleteOne({_id:req.params.id})
+    .then( deletedData=>{
+        res.status(200).json({
+            message:"data successfully deleted",
+            data:deletedData
+        })
+    }).catch(
+      error =>{
+          res.status(400).json({
+              error:error
+          })
+      }
+  )
+  }

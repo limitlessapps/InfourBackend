@@ -22,3 +22,21 @@ exports.create_assets =(req,res,next)=>{
  })
 
 }
+
+
+
+exports.delete_assets = (req,res,next)=>{
+    Assets.deleteOne({_id:req.params.id})
+    .then( deletedData=>{
+        res.status(200).json({
+            message:"data successfully deleted",
+            data:deletedData
+        })
+    }).catch(
+      error =>{
+          res.status(400).json({
+              error:error
+          })
+      }
+  )
+  }
