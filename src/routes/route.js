@@ -17,7 +17,8 @@ const fileController = require("../controllers/fileHandling");
 // =================================================account
 router.post("/account",AccountController.create_account);
 router.get("/account",AccountController.get_account);
-router.patch("/account",AccountController.modify_account);
+router.patch("/account/:id",AccountController.modify_account);
+router.delete("/account/:id",AccountController.delete_account);
 //==================================================== family
 router.post("/family",FamilyController.create_family);
 //==================================================== insurance
@@ -33,8 +34,10 @@ router.post("/self_employed_occupation",Self_employed.create_self_employed_occup
 router.post("/occupation",Occupation.create_occupation);
 //======================================================= social_media
 router.post("/social_media",Social_media.create_social_media);
-//====================================================== Files 
-router.post("/files_doc",Files.create_files);
+//====================================================== Files (cloudinary)
+// router.post("/files_cloudinary",Files.create_files);
 //====================================================== files;
-// router.post("/files",fileController.uploadFile);
+// router.post("/no_database",fileController.uploadFile);
+//========================================================= files(multer)
+router.post("/files_multer",);
 module.exports = router;

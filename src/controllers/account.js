@@ -66,10 +66,35 @@ exports.get_account = (req,res,next)=>{
 
 }
 
+// exports.modify_account = (req,res,next)=>{
+//     const id = req.params._id;
+//     const updateOps = {}
+//     for  (const ops of req.body){
+//      updateOps[ops.propName] = ops.value
+//     }
+    
+//  Account.update({_id:id},{$set:updateOps})
+//   .exec()
+//   .then( newAccount=>{
+//           res.status(200).json({
+//               message:"data successfully updated",
+//               data:newAccount
+//               // in post mAN:[{"propName":"title","value":"value of title"}]
+        
+//           })
+//       }).catch(
+//           error =>{
+//               res.status(400).json({
+//                   error:error
+//               })
+//           }
+//       )
+// };
+
+
 exports.modify_account = (req,res,next)=>{
-    const id = req.params.id;
     const account = new Account({
-        _id:id,
+        _id:req.params.id,
         first_name:req.body.first_name,
         middle_name:req.body.middle_name,
         surname:req.body.surname,
@@ -96,10 +121,13 @@ exports.modify_account = (req,res,next)=>{
         social_media:req.body.social_media,
         file_upload:req.body.file_upload,
         relative:req.body.relative,
-         });
-         Account.updateOne({_id:id,account})
+        });
+         Account.updateOne({_id:req.params.id},{ $set:{account} })
          .then(result=>{
-             res.status(200).json(result)
+             res.status(200).json({
+                 result:result,
+                 consoleResult:console.log(result)
+             })
          })
          .catch(err=>{
              res.status(400).json({
@@ -107,3 +135,21 @@ exports.modify_account = (req,res,next)=>{
              })
          })
 }
+
+
+
+exports.delete_account = (req,res,next)=>{
+    Account.deleteOne({_id:req.params.id})
+    .then( deletedData=>{
+        res.status(200).json({
+            message:"data successfully deleted",
+            data:deletedData
+        })
+    }).catch(
+      error =>{
+          res.status(400).json({
+              error:error
+          })
+      }
+  )
+  }
