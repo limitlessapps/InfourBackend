@@ -66,30 +66,6 @@ exports.get_account = (req,res,next)=>{
 
 }
 
-// exports.modify_account = (req,res,next)=>{
-//     const id = req.params._id;
-//     const updateOps = {}
-//     for  (const ops of req.body){
-//      updateOps[ops.propName] = ops.value
-//     }
-    
-//  Account.update({_id:id},{$set:updateOps})
-//   .exec()
-//   .then( newAccount=>{
-//           res.status(200).json({
-//               message:"data successfully updated",
-//               data:newAccount
-//               // in post mAN:[{"propName":"title","value":"value of title"}]
-        
-//           })
-//       }).catch(
-//           error =>{
-//               res.status(400).json({
-//                   error:error
-//               })
-//           }
-//       )
-// };
 
 
 exports.modify_account = (req,res,next)=>{
@@ -122,7 +98,7 @@ exports.modify_account = (req,res,next)=>{
         file_upload:req.body.file_upload,
         relative:req.body.relative,
         });
-         Account.updateOne({_id:req.params.id},{ $set:{account} })
+         Account.updateOne({_id:req.params.id,account})
          .then(result=>{
              res.status(200).json({
                  result:result,
