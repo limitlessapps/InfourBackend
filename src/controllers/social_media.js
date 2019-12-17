@@ -21,3 +21,21 @@ exports.create_social_media =(req,res,next)=>{
  })
 
 }
+
+
+
+exports.delete_social_media = (req,res,next)=>{
+    Social_media.deleteOne({_id:req.params.id})
+    .then( deletedData=>{
+        res.status(200).json({
+            message:"data successfully deleted",
+            data:deletedData
+        })
+    }).catch(
+      error =>{
+          res.status(400).json({
+              error:error
+          })
+      }
+  )
+  }
