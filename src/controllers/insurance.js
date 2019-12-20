@@ -1,5 +1,5 @@
 const Insurance = require("../model/insurance");
-
+//================================================== create
 exports.create_insurance =(req,res,next)=>{
  const insurance = new Insurance({
     insurance_name:req.body.insurance_name,
@@ -7,7 +7,6 @@ exports.create_insurance =(req,res,next)=>{
     telephone:req.body.telephone,
     date_of_birth:req.body.date_of_birth,
     expiration_date:req.body.expiration_date
-
  });
 
  insurance
@@ -22,8 +21,39 @@ exports.create_insurance =(req,res,next)=>{
  })
 
 }
-
-
+//================================================== update
+exports.modify_insurance = (req,res,next)=>{
+    let body = {}
+       if (req.body.insurance_name) {
+           body["insurance_name"] = req.body.insurance_name
+       }
+       if (req.body.insurance_number ) {
+           body["insurance_number"] = req.body.insurance_number
+       }
+       if (req.body.telephone ) {
+        body["telephone"] = req.body.telephone
+    }
+    if (req.body.date_of_birth ) {
+        body["date_of_birth"] = req.body.date_of_birth
+    }
+    if (req.body.expiration_date) {
+        body["expiration_date"] = req.body.expiration_date
+    }
+      console.log(body)
+      let _id = req.params.id;
+      console.log(_id)
+      Insurance.findOneAndUpdate({ _id }, body)
+      .then(result=>{
+          console.log(body)
+       res.status(200).json(result)
+   })
+   .catch(err=>{
+       res.status(400).json({
+           error:err
+       })
+   })
+   }
+//==================================================delete
 exports.delete_insurance = (req,res,next)=>{
     Insurance.deleteOne({_id:req.params.id})
     .then( deletedData=>{
