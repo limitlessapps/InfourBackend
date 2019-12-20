@@ -63,7 +63,7 @@ const accountSchema = new Schema({
     bank:[{ type: Schema.Types.ObjectId, ref: 'Bank' }],
     assets:[{ type: Schema.Types.ObjectId, ref:'Assets' }],
     social_media:[{ type: Schema.Types.ObjectId, ref: 'Social_media' }],
-    file_upload:[{ type: Schema.Types.ObjectId, ref: 'File_upload' }],
+    file_upload:[{ type: Schema.Types.ObjectId, ref: 'Files' }],
     relative:[{type:Schema.Types.ObjectId, ref:" Person"}]
 });
 
