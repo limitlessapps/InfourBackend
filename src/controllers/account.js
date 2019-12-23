@@ -1,6 +1,5 @@
 const Account = require('../model/account');
-
-
+//============================================== create
 exports.create_account = (req,res,next)=>{
  const account = new Account({
    first_name:req.body.first_name,
@@ -41,7 +40,7 @@ exports.create_account = (req,res,next)=>{
         })
     })
 }
-
+//========================================================== get
 exports.get_account = (req,res,next)=>{
     Account
     .find()
@@ -61,7 +60,7 @@ exports.get_account = (req,res,next)=>{
         })
     })
 }
-
+//=========================================================== update
 exports.modify_account = (req,res,next)=>{
  let body = {}
     if (req.body.first_name ) {
@@ -122,30 +121,7 @@ exports.modify_account = (req,res,next)=>{
     if (req.body.primary_number ) {
         body["primary_number"] = req.body.primary_number
     }
-    // if (req.body.family ) {
-    //     body["family"] = req.body.family
-    // }
-    // if (req.body.occupation ) {
-    //     body["occupation"] = req.body.occupation
-    // }
-    // if (req.body.insurance ) {
-    //     body["insurance"] = req.body.insurance
-    // }
-    // if (req.body.bank ) {
-    //     body["bank"] = req.body.bank
-    // }
-    // if (req.body.assets ) {
-    //     body["assets"] = req.body.assets
-    // }
-    // if (req.body.social_media ) {
-    //     body["social_media"] = req.body.social_media
-    // }
-    // if (req.body.file_upload ) {
-    //     body["file_upload"] = req.body.file_upload
-    // }
-    // if (req.body.file_upload ) {
-    //     body["file_upload"] = req.body.file_upload
-    // }    
+  
    console.log(body)
    let _id = req.params.id;
    console.log(_id)
@@ -161,7 +137,7 @@ exports.modify_account = (req,res,next)=>{
 })
 
 }
-
+//============================================== delete
 exports.delete_account = (req,res,next)=>{
     Account.deleteOne({_id:req.params.id})
     .then( deletedData=>{

@@ -5,12 +5,12 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Routes = require('./src/routes/route')
-const fileUpload = require("express-fileupload");
+const Routes = require('./src/routes/route');
+// const fileUpload = require("express-fileupload");
 
 
 // ======================================================== middlewares
-app.use(fileUpload({useTempFiles:true}));
+// app.use(fileUpload({useTempFiles:true}));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({limit:'10mb',extended:true}));
 app.use(bodyParser.json({limit:'10mb',extended:true}))

@@ -55,7 +55,6 @@ exports.modify_employed_occupation = (req,res,next)=>{
            error:err
        })
    })
-   
    }
 
 //=================================================== delete
