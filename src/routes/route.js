@@ -11,8 +11,15 @@ const Student = require("../controllers/student_occupation");
 const Employed = require("../controllers/employed_occupation");
 const Self_employed = require("../controllers/self_employed_occupation");
 const Occupation = require("../controllers/occupation");
-const fileController = require("../controllers/fileHandling");
+// const fileController = require("../controllers/fileHandling");
 
+const multer = require('multer');
+const path = require('path');
+const UPLOAD_PATH = path.resolve(__dirname, 'path/to/uploadedFiles')
+const upload = multer({
+  dest: UPLOAD_PATH,
+  limits: {fileSize: 1000000, files: 5}
+})
 
 // =================================================account
 router.post("/account",AccountController.create_account);
@@ -57,5 +64,6 @@ router.delete("/social_media/:id",Social_media.modify_social_media);
 //====================================================== files;
 // router.post("/no_database",fileController.uploadFile);
 //========================================================= files(multer)
-router.post("/files_multer",);
+router.post("/image",upload.array('image',4),Files.create_image);
+router.get("/image/:id",Files.get_image);
 module.exports = router;

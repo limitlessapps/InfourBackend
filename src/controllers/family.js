@@ -72,7 +72,6 @@ exports.modify_family = (req,res,next)=>{
            error:err
        })
    })
-   
    }
 //==================================================delete
 exports.delete_family = (req,res,next)=>{
@@ -87,6 +86,5 @@ exports.delete_family = (req,res,next)=>{
           res.status(400).json({
               error:error
           })
-      }
-  )
+      })
   }
