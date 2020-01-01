@@ -25,7 +25,7 @@ exports.create_social_media =(req,res,next)=>{
 exports.modify_social_media = (req,res,next)=>{
     let body = {}
        if (req.body.twitter) {
-           body["twiter"] = req.body.twitter
+           body["twitter"] = req.body.twitter
        }
        if (req.body.facebook) {
            body["facebook"] = req.body.facebook
