@@ -40,10 +40,8 @@ exports.modify_Student_occupation = (req,res,next)=>{
     if (req.body.street) {
         body["street"] = req.body.street
     }
-      console.log(body)
       let _id = req.params.id;
-      console.log(_id)
-      Social_media.findOneAndUpdate({ _id }, body)
+      Student.findOneAndUpdate({ _id }, body)
       .then(result=>{
           console.log(body)
        res.status(200).json(result)

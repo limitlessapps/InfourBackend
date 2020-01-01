@@ -41,10 +41,8 @@ exports.modify_insurance = (req,res,next)=>{
     }
       console.log(body)
       let _id = req.params.id;
-      console.log(_id)
       Insurance.findOneAndUpdate({ _id }, body)
       .then(result=>{
-          console.log(body)
        res.status(200).json(result)
    })
    .catch(err=>{

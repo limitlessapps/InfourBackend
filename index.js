@@ -6,12 +6,14 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Routes = require('./src/routes/route');
+const imageRoute = require('./src/routes/imageRoute')
 // const fileUpload = require("express-fileupload");
 
 
 // ======================================================== middlewares
 // app.use(fileUpload({useTempFiles:true}));
 app.use(morgan('dev'));
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({limit:'10mb',extended:true}));
 app.use(bodyParser.json({limit:'10mb',extended:true}))
 app.use(cors());
@@ -20,7 +22,7 @@ app.use(cors());
 app.use("/welcome",(req,res)=>{
     res.status(200).send('welcome')
 });
-
+app.use('/api/image', imageRoute)
 app.use('/api',Routes);
 //=========================================================== connect mongdb;
 

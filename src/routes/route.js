@@ -6,20 +6,11 @@ const InsuranceController = require("../controllers/insurance");
 const BankController = require("../controllers/bank")
 const Social_media = require("../controllers/social_media");
 const AssetsController = require("../controllers/asset");
-const Files = require("../controllers/files");
+// const Files = require("../controllers/files");
 const Student = require("../controllers/student_occupation");
 const Employed = require("../controllers/employed_occupation");
 const Self_employed = require("../controllers/self_employed_occupation");
 const Occupation = require("../controllers/occupation");
-// const fileController = require("../controllers/fileHandling");
-
-const multer = require('multer');
-const path = require('path');
-const UPLOAD_PATH = path.resolve(__dirname, 'path/to/uploadedFiles')
-const upload = multer({
-  dest: UPLOAD_PATH,
-  limits: {fileSize: 1000000, files: 5}
-})
 
 // =================================================account
 router.post("/account",AccountController.create_account);
@@ -41,7 +32,7 @@ router.delete("/assets/:id",AssetsController.delete_assets);
 //===================================================== bank
 router.post("/bank_name",BankController.create_bank_name);
 router.patch("/bank/:id",BankController.modify_bank_name);
-router.delete("/bank_name/:id",BankController.delete_bank);
+router.delete("/bank/:id",BankController.delete_bank);
 //==================================================== occupation
 router.post("/student_occupation",Student.create_Student_occupation);
 router.patch("/student_occupation/:id",Student.modify_Student_occupation);
@@ -58,12 +49,12 @@ router.delete("/occupation/:id",Occupation.delete_occupation);
 //======================================================= social_media
 router.post("/social_media",Social_media.create_social_media);
 router.delete("/social_media/:id",Social_media.delete_social_media);
-router.delete("/social_media/:id",Social_media.modify_social_media);
-//====================================================== Files (cloudinary)
-// router.post("/files_cloudinary",Files.create_files);
+router.patch("/social_media/:id",Social_media.modify_social_media);
+
 //====================================================== files;
 // router.post("/no_database",fileController.uploadFile);
 //========================================================= files(multer)
-router.post("/image",upload.array('image',4),Files.create_image);
-router.get("/image/:id",Files.get_image);
+// router.post("/image",upload.array('image',4),Files.create_image);
+// router.post("/image",middleware,Files.create_image);
+// router.get("/image/:id",Files.get_image);
 module.exports = router;
