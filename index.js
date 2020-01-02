@@ -22,7 +22,7 @@ app.use(cors());
 app.use("/welcome",(req,res)=>{
     res.status(200).send('welcome')
 });
-app.use('/api/image', imageRoute)
+app.use('/api/image',  imageRoute)
 app.use('/api',Routes);
 // //=========================================================== connect mongdb;
 
