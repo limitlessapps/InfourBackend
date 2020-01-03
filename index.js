@@ -7,8 +7,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Routes = require('./src/routes/route');
 const imageRoute = require('./src/routes/imageRoute')
+require('dotenv').config()
 // const fileUpload = require("express-fileupload");
-
 
 // ======================================================== middlewares
 // app.use(fileUpload({useTempFiles:true}));
@@ -26,26 +26,26 @@ app.use('/api/image',  imageRoute)
 app.use('/api',Routes);
 // //=========================================================== connect mongdb;
 
-mongoose.connect('mongodb://localhost:27017/Infour',
-    {
-        useCreateIndex: true,
-        useNewUrlParser: true
-    }
-    , function () {
-        console.log("database connected success")
-    })
+// mongoose.connect('mongodb://localhost:27017/Infour',
+//     {
+//         useCreateIndex: true,
+//         useNewUrlParser: true
+//     }
+//     , function () {
+//         console.log("database connected success")
+//     })
 
 //=========================================================== connect mongdb_ATLAS;
 
-// mongoose.connect('mongodb://zachee:'+ process.env.MONGO_ATLAS_PW +'@cluster0-shard-00-00-wzg27.mongodb.net:27017,cluster0-shard-00-01-wzg27.mongodb.net:27017,cluster0-shard-00-02-wzg27.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority',
-// {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
-// .then( () => {
-//     console.log('Connection to the Atlas Cluster is successful!')
-//   })
-//   .catch( (err) => console.error(err));
+
+mongoose.connect(process.env.MONGO_ATLAS_DB_URL,
+    {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then( () => {
+    console.log('Connection to the Atlas Cluster is successful!')
+  })
+  .catch( (err) => console.error(err));
 
 
 //======================================================= port 
