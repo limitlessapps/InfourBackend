@@ -19,8 +19,8 @@ app.use(bodyParser.json({limit:'10mb',extended:true}))
 app.use(cors());
 
 // =========================================================== routes;
-app.use("/welcome",(req,res)=>{
-    res.status(200).send('welcome')
+app.use("/",(req,res)=>{
+    res.status(200).send('welcome to the infour app')
 });
 app.use('/api/image',  imageRoute)
 app.use('/api',Routes);
