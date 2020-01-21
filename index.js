@@ -24,7 +24,7 @@ app.use("/welcome",(req,res)=>{
 });
 app.use('/api/image',imageRoute)
 app.use('/api',Routes);
-// //=========================================================== connect mongdb;
+//=========================================================== connect mongdb;
 
 // mongoose.connect('mongodb://localhost:27017/Infour',
 //     {

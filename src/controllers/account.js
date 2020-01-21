@@ -121,10 +121,8 @@ exports.modify_account = (req,res,next)=>{
     if (req.body.primary_number ) {
         body["primary_number"] = req.body.primary_number
     }
-  
-   console.log(body)
+
    let _id = req.params.id;
-   console.log(_id)
    Account.findOneAndUpdate({ _id }, body)
    .then(result=>{
        console.log(body)
