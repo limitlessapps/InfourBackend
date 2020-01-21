@@ -19,18 +19,21 @@ router.patch("/account/:id",AccountController.modify_account);
 router.delete("/account/:id",AccountController.delete_account);
 //==================================================== family
 router.post("/family",FamilyController.create_family);
+router.get("/family",FamilyController.get_family);
 router.delete("/family/:id",FamilyController.delete_family);
 router.patch("/family/:id",FamilyController.modify_family);
 //==================================================== insurance
 router.post("/insurance",InsuranceController.create_insurance);
+router.get("/insurance",InsuranceController.get_insurance);
 router.patch("/insurance/:id",InsuranceController.modify_insurance);
 router.delete("/insurance/:id",InsuranceController.delete_insurance);
 //===================================================assets
 router.post("/assets",AssetsController.create_assets);
+router.get("/assets",AssetsController.get_assets);
 router.patch("/assets/:id",AssetsController.modify_assets);
 router.delete("/assets/:id",AssetsController.delete_assets);
 //===================================================== bank
-router.post("/bank_name",BankController.get_bank);
+router.get("/bank_name",BankController.get_bank);
 router.post("/bank_name",BankController.create_bank_name);
 router.patch("/bank/:id",BankController.modify_bank_name);
 router.delete("/bank/:id",BankController.delete_bank);
@@ -49,6 +52,7 @@ router.patch("/occupation/:id",Occupation.modify_occupation);
 router.delete("/occupation/:id",Occupation.delete_occupation);
 //======================================================= social_media
 router.post("/social_media",Social_media.create_social_media);
+router.get("/social_media",Social_media.get_social_media);
 router.delete("/social_media/:id",Social_media.delete_social_media);
 router.patch("/social_media/:id",Social_media.modify_social_media);
 

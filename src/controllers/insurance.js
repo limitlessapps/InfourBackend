@@ -21,6 +21,19 @@ exports.create_insurance =(req,res,next)=>{
  })
 
 }
+//========================================================== get
+exports.get_insurance = (req,res,next)=>{
+    Insurance
+    .find()
+    .then(result=>{
+        res.status(200).json(result)
+    })
+    .catch(error=>{
+        res.status(400).json({
+            error:error
+        })
+    })
+}
 //================================================== update
 exports.modify_insurance = (req,res,next)=>{
     let body = {}

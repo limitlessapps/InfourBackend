@@ -21,6 +21,19 @@ exports.create_social_media =(req,res,next)=>{
  })
 
 }
+//========================================================== get
+exports.get_social_media = (req,res,next)=>{
+    Social_media
+    .find()
+    .then(result=>{
+        res.status(200).json(result)
+    })
+    .catch(error=>{
+        res.status(400).json({
+            error:error
+        })
+    })
+}
 //================================================== update
 exports.modify_social_media = (req,res,next)=>{
     let body = {}
