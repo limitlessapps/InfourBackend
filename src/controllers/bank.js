@@ -19,7 +19,7 @@ exports.create_bank_name =(req,res,next)=>{
 
 //========================================================== get
 exports.get_bank = (req,res,next)=>{
-    Account
+    Bank
     .find()
     .then(result=>{
         res.status(200).json(result)
@@ -36,12 +36,10 @@ exports.modify_bank_name = (req,res,next)=>{
        if (req.body.bank_name ) {
            body["bank_name"] = req.body.bank_name
        }
-      console.log(body)
+
       let _id = req.params.id;
-      console.log(_id)
       Bank.findOneAndUpdate({ _id }, body)
       .then(result=>{
-          console.log(body)
        res.status(200).json(result)
    })
    .catch(err=>{
