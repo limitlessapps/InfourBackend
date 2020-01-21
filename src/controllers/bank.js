@@ -17,6 +17,19 @@ exports.create_bank_name =(req,res,next)=>{
  })
 }
 
+//========================================================== get
+exports.get_bank = (req,res,next)=>{
+    Account
+    .find()
+    .then(result=>{
+        res.status(200).json(result)
+    })
+    .catch(error=>{
+        res.status(400).json({
+            error:error
+        })
+    })
+}
 //================================================== update
 exports.modify_bank_name = (req,res,next)=>{
     let body = {}
