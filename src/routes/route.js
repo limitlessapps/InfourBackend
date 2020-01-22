@@ -11,7 +11,11 @@ const Student = require("../controllers/student_occupation");
 const Employed = require("../controllers/employed_occupation");
 const Self_employed = require("../controllers/self_employed_occupation");
 const Occupation = require("../controllers/occupation");
-
+const UserController = require("../controllers/user");
+const authentication = require("../middleware/Authentication");
+//==================================================USER 
+router.post("/signup",UserController.onRegister);
+router.post("/login",UserController.login);
 // =================================================account
 router.post("/account",AccountController.create_account);
 router.get("/account",AccountController.get_account);
@@ -34,7 +38,7 @@ router.patch("/assets/:id",AssetsController.modify_assets);
 router.delete("/assets/:id",AssetsController.delete_assets);
 //===================================================== bank
 router.get("/bank_name",BankController.get_bank);
-router.post("/bank_name",BankController.create_bank_name);
+router.post("/bank_name",authentication,BankController.create_bank_name);
 router.patch("/bank/:id",BankController.modify_bank_name);
 router.delete("/bank/:id",BankController.delete_bank);
 //==================================================== occupation
