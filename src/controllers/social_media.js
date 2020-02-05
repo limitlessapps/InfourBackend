@@ -5,8 +5,8 @@ exports.create_social_media =(req,res,next)=>{
     twitter:req.body.twitter,
     facebook:req.body.facebook,
     instagram:req.body.instagram,
-    linkedin:req.body.linkedIn,
-    whatsup_number:req.body.whatsUp_number
+    linkedin:req.body.linkedin,
+    whatsup_number:req.body.whatsup_number
  });
 
  social_media
