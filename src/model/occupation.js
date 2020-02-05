@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const occupationSchema = new Schema({
-    student:{ type:Schema.Types.ObjectId, ref:"Student"},
+    student:[{ type:Schema.Types.ObjectId, ref:"Student"}],
     employed:[{ type:Schema.Types.ObjectId, ref:"Employed"}],
     self_employed:[{ type:Schema.Types.ObjectId, ref:"Self_employed"}],
     other:[String]

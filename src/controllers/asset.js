@@ -10,7 +10,6 @@ exports.create_assets =(req,res,next)=>{
        district:req.body.district,
        street:req.body.street
  });
-
  assets
  .save()
  .then(result=>{

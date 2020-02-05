@@ -16,7 +16,6 @@ exports.create_bank_name =(req,res,next)=>{
      })
  })
 }
-
 //========================================================== get
 exports.get_bank = (req,res,next)=>{
     Bank

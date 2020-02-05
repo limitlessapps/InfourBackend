@@ -19,6 +19,22 @@ exports.create_occupation =(req,res,next)=>{
  })
 
 }
+//========================================================== get
+exports.get_occupation = (req,res,next)=>{
+    Occupation
+    .find()
+    .populate("student")
+    .populate("employed")
+    .populate("self_employed")
+    .then(result=>{
+        res.status(200).json(result)
+    })
+    .catch(error=>{
+        res.status(400).json({
+            error:error
+        })
+    })
+}
 //================================================== update
 exports.modify_occupation = (req,res,next)=>{
     let body = {}

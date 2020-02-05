@@ -51,9 +51,10 @@ router.delete("/employed_occupation/:id",Employed.delete_occupation_employed);
 router.post("/self_employed_occupation",Self_employed.create_self_employed_occupation);
 router.patch("/self_employed_occupation/:id",Self_employed.modify_self_employed_occupation);
 router.delete("/self_employed_occupation/:id",Self_employed.delete_occupation_self_employed);
+router.get("/occupation",Occupation.get_occupation);
 router.post("/occupation",Occupation.create_occupation);
-router.patch("/occupation/:id",Occupation.modify_occupation);
-router.delete("/occupation/:id",Occupation.delete_occupation);
+// router.patch("/occupation/:id",Occupation.modify_occupation);
+// router.delete("/occupation/:id",Occupation.delete_occupation);
 //======================================================= social_media
 router.post("/social_media",Social_media.create_social_media);
 router.get("/social_media",Social_media.get_social_media);
