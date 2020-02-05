@@ -26,26 +26,26 @@ app.use('/api/image',imageRoute)
 app.use('/api',Routes);
 //=========================================================== connect mongdb;
 
-mongoose.connect('mongodb://localhost:27017/Infour',
-    {
-        useCreateIndex: true,
-        useNewUrlParser: true
-    }
-    , function () {
-        console.log("database connected success")
-    })
+// mongoose.connect('mongodb://localhost:27017/Infour',
+//     {
+//         useCreateIndex: true,
+//         useNewUrlParser: true
+//     }
+//     , function () {
+//         console.log("database connected success")
+//     })
 
 //=========================================================== connect mongdb_ATLAS;
 
  
-// mongoose.connect(process.env.MONGO_ATLAS_DB_URL,
-//     {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }).then( () => {
-//     console.log('Connection to the Atlas Cluster is successful!')
-//   })
-//   .catch( (err) => console.error(err));
+mongoose.connect(process.env.MONGO_ATLAS_DB_URL,
+    {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then( () => {
+    console.log('Connection to the Atlas Cluster is successful!')
+  })
+  .catch( (err) => console.error(err));
 
 
 //======================================================= port 
