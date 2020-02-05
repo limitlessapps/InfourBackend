@@ -7,9 +7,7 @@ exports.create_Student_occupation =(req,res,next)=>{
     province:req.body.province,
     district:req.body.district,
     street:req.body.street
-
  });
-
  student
  .save()
  .then(result=>{
