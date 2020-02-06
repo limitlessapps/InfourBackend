@@ -5,18 +5,18 @@ const assetSchema = new Schema({
     asset_name:{
         type:[String]
     },
-    country:{
-        type:String
-    },
-    province:{
-        type:String
-    },
-    district:{
-        type:String
-    },
-    street:{
-        type:String
-    }
+    // country:{
+    //     type:String
+    // },
+    // province:{
+    //     type:String
+    // },
+    // district:{
+    //     type:String
+    // },
+    // street:{
+    //     type:String
+    // }
 
 });
 
