@@ -9,4 +9,5 @@ const bankSchema = new Schema({
 
 
 const Bank = mongoose.model("Bank",bankSchema);
+
 module.exports = Bank;
