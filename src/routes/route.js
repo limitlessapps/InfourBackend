@@ -38,7 +38,7 @@ router.patch("/assets/:id",AssetsController.modify_assets);
 router.delete("/assets/:id",AssetsController.delete_assets);
 //===================================================== bank
 router.get("/bank_name",BankController.get_bank);
-router.post("/bank_name",authentication,BankController.create_bank_name);
+router.post("/bank_name",BankController.create_bank_name);
 router.patch("/bank/:id",BankController.modify_bank_name);
 router.delete("/bank/:id",BankController.delete_bank);
 //==================================================== occupation
