@@ -19,11 +19,12 @@ exports.create_assets =(req,res,next)=>{
  })
 
 }
-//========================================================== get
-exports.get_assets = (req,res,next)=>{
+// get by single id
+exports.get_One_asset = (req,res,next)=>{
+    const {userId} = req.params;
     Assets
-    .find()
-    .then(result=>{
+    .findOne({userId})
+    .then( result=>{
         res.status(200).json(result)
     })
     .catch(error=>{
@@ -31,7 +32,10 @@ exports.get_assets = (req,res,next)=>{
             error:error
         })
     })
+ 
 }
+
+
 //================================================== update
 exports.modify_assets = (req,res,next)=>{
     let body = {}
