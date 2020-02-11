@@ -42,7 +42,7 @@ exports.create_account = (req,res,next)=>{
         })
     })
 }
-// get by specific id ;
+// get by specific userId ;
 exports.get_One_account = (req,res,next)=>{
     const {userId} = req.params;
     console.log(userId)

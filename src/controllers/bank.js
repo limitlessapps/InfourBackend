@@ -18,11 +18,12 @@ exports.create_bank_name =(req,res,next)=>{
      })
  })
 }
-//========================================================== get
-exports.get_bank = (req,res,next)=>{
+
+exports.get_One_bank = (req,res,next)=>{
+    const {userId} = req.params;
     Bank
-    .find()
-    .then(result=>{
+    .findOne({userId})
+    .then( result=>{
         res.status(200).json(result)
     })
     .catch(error=>{
@@ -31,6 +32,7 @@ exports.get_bank = (req,res,next)=>{
         })
     })
 }
+
 //================================================== update
 exports.modify_bank_name = (req,res,next)=>{
     let body = {}

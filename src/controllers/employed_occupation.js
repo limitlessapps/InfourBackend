@@ -23,6 +23,21 @@ exports.create_employed_occupation =(req,res,next)=>{
      })
  })
 }
+
+// get data by userId 
+exports.get_One_employment = (req,res,next)=>{
+    const {userId} = req.params;
+    Employed
+    .findOne({userId})
+    .then( result=>{
+        res.status(200).json(result)
+    })
+    .catch(error=>{
+        res.status(400).json({
+            error:error
+        })
+    })
+}
 //================================================== update
 exports.modify_employed_occupation = (req,res,next)=>{
     let body = {}

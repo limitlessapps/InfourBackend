@@ -24,10 +24,12 @@ exports.create_social_media =(req,res,next)=>{
 
 }
 //========================================================== get
-exports.get_social_media = (req,res,next)=>{
+
+exports.get_One_social_media = (req,res,next)=>{
+    const {userId} = req.params;
     Social_media
-    .find()
-    .then(result=>{
+    .findOne({userId})
+    .then( result=>{
         res.status(200).json(result)
     })
     .catch(error=>{
