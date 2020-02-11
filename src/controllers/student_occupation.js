@@ -1,7 +1,9 @@
 const Student = require("../model/student_occupation");
 //==========================================================create
 exports.create_Student_occupation =(req,res,next)=>{
+    const {userId} = req.tokenData
  const student = new Student({
+     userId,
     school:req.body.school,
     country:req.body.country,
     province:req.body.province,

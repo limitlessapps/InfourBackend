@@ -29,6 +29,9 @@ const familySchema = new Schema({
     children:{
         type:[String]
     },
+    userId:{
+        type:String,
+    },
     Dependency:{
         type:String
     }

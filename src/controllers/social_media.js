@@ -1,7 +1,9 @@
 const Social_media = require("../model/social_media");
 // ========================================================= create
 exports.create_social_media =(req,res,next)=>{
+    const {userId} = req.tokenData
  const social_media = new Social_media({
+     userId,
     twitter:req.body.twitter,
     facebook:req.body.facebook,
     instagram:req.body.instagram,

@@ -1,7 +1,9 @@
 const Bank = require("../model/bank");
 //============================================create
 exports.create_bank_name =(req,res,next)=>{
+    const {userId} = req.tokenData
  const bank = new Bank({
+     userId,
     bank_name:req.body.bank_name,
  });
 

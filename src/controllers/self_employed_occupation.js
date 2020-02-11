@@ -1,7 +1,9 @@
 const Self_employed = require("../model/self_employed_occupation");
 // ========================================================= create
 exports.create_self_employed_occupation =(req,res,next)=>{
+    const {userId} = req.tokenData
  const self_employed = new Self_employed({
+      userId,
        business_type:req.body.business_type,
        business_name:req.body.business_name,
        tin_number:req.body.tin_number,

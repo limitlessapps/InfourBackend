@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 
 const employed_Schema = new Schema({
+    userId:{
+        type:String
+    },
     company_name:{
         type:String
     },

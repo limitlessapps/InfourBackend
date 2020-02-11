@@ -2,13 +2,10 @@ const Assets = require("../model/asset");
 
 //================================================create
 exports.create_assets =(req,res,next)=>{
+    const {userId} = req.tokenData;
  const assets = new Assets({
+       userId,
        asset_name:req.body.asset_name,
-    //    building:req.body.building,
-    //    country:req.body.country,
-    //    province:req.body.province,
-    //    district:req.body.district,
-    //    street:req.body.street
  });
  assets
  .save()
@@ -41,18 +38,6 @@ exports.modify_assets = (req,res,next)=>{
        if (req.body.asset_name ) {
            body["asset_name"] = req.body.asset_name
        }
-    //    if (req.body.country ) {
-    //        body["country"] = req.body.country
-    //    }
-    //    if (req.body.province ) {
-    //     body["province"] = req.body.province
-    // }
-    // if (req.body.district ) {
-    //     body["district"] = req.body.district
-    // }
-    // if (req.body.street ) {
-    //     body["street"] = req.body.street
-    // }
       let _id = req.params.id;
       Assets.findOneAndUpdate({ _id }, body)
       .then(result=>{

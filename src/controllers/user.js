@@ -21,8 +21,21 @@ exports.onRegister = async (req,res,next)=>{
      password:hashPassword
  });
  try{
-     const savedUser = await user.save()
-     res.status(201).json(savedUser);
+     const savedUser = await user.save();
+     const token = jwt.sign(
+        {
+          email: user.email,
+          userId: user._id
+        },
+        process.env.JWT_KEY,
+        {
+          expiresIn: "1h"
+        }
+      );
+     res.status(201).json({
+         result:savedUser,
+         token:token
+     });
  }catch(err){
      res.status(400).json(err)
  }
@@ -48,7 +61,7 @@ exports.login = async (req,res,next)=>{
         }
       );
      res.status(200).json({
-          user,
+         
           token:token
-         })
+         });
 }

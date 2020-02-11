@@ -57,14 +57,17 @@ const accountSchema = new Schema({
     secondary_number:{
         type:String
     },
-    family:{ type: Schema.Types.ObjectId, ref: 'Family' },
-    occupation:[{ type: Schema.Types.ObjectId, ref: 'Occupation' }],
-    insurance:[{ type: Schema.Types.ObjectId, ref: 'Insurance' }],
-    bank:[{ type: Schema.Types.ObjectId, ref: 'Bank' }],
-    assets:[{ type: Schema.Types.ObjectId, ref:'Assets' }],
-    social_media:[{ type: Schema.Types.ObjectId, ref: 'Social_media' }],
-    file_upload:[{ type: Schema.Types.ObjectId, ref: 'Image' }],
-    relative:[{type:Schema.Types.ObjectId, ref:" Person"}]
+    userId:{
+        type:String
+    }
+    // family:{ type: Schema.Types.ObjectId, ref: 'Family' },
+    // occupation:{ type: Schema.Types.ObjectId, ref: 'Occupation' },
+    // insurance:{ type: Schema.Types.ObjectId, ref: 'Insurance' },
+    // bank:{ type: Schema.Types.ObjectId, ref: 'Bank' },
+    // assets:{ type: Schema.Types.ObjectId, ref:'Assets' },
+    // social_media:{ type: Schema.Types.ObjectId, ref: 'Social_media' },
+    // file_upload:{ type: Schema.Types.ObjectId, ref: 'Image' },
+    // relative:{type:Schema.Types.ObjectId, ref:" Person"}
 });
 
 
