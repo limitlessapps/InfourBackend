@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 
 const Self_employed_Schema = new Schema({
+    userId:{
+        type:String
+    },
     business_type:{
         type:String
     },

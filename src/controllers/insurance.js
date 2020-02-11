@@ -1,7 +1,9 @@
 const Insurance = require("../model/insurance");
 //================================================== create
 exports.create_insurance =(req,res,next)=>{
+    const {userId,email}=req.tokenData
  const insurance = new Insurance({
+     userId,
     insurance_name:req.body.insurance_name,
     insurance_number:req.body.insurance_number,
     telephone:req.body.telephone,
@@ -21,11 +23,13 @@ exports.create_insurance =(req,res,next)=>{
  })
 
 }
-//========================================================== get
-exports.get_insurance = (req,res,next)=>{
+//========================================================== get specific
+exports.get_One_Insurance = (req,res,next)=>{
+    const {userId} = req.params;
+    console.log(userId)
     Insurance
-    .find()
-    .then(result=>{
+    .findOne({userId})
+    .then( result=>{
         res.status(200).json(result)
     })
     .catch(error=>{
@@ -33,7 +37,10 @@ exports.get_insurance = (req,res,next)=>{
             error:error
         })
     })
+ 
 }
+
+
 //================================================== update
 exports.modify_insurance = (req,res,next)=>{
     let body = {}

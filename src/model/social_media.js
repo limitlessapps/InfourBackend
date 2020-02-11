@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const social_mediaSchema = new Schema({
+    userId:{
+        type:String
+    },
     twitter:{
         type:String
     },

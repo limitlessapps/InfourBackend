@@ -1,7 +1,9 @@
 const Employed = require("../model/employed_occupation");
 //========================================================create
 exports.create_employed_occupation =(req,res,next)=>{
+    const {userId} = req.tokenData
  const employed = new Employed({
+     userId,
     company_name:req.body.company_name,
     position:req.body.position,
     country:req.body.country,

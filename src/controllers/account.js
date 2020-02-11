@@ -1,7 +1,9 @@
 const Account = require('../model/account');
-//============================================== create
+
 exports.create_account = (req,res,next)=>{
+    const {userId,email}=req.tokenData
  const account = new Account({
+    userId,
    first_name:req.body.first_name,
    middle_name:req.body.middle_name,
    surname:req.body.surname,
@@ -20,14 +22,14 @@ exports.create_account = (req,res,next)=>{
    email_work:req.body.email_work,
    primary_number:req.body.primary_number,
    secondary_number:req.body.secondary_number,
-   family:req.body.family,
-   occupation:req.body.occupation,
-   insurance:req.body.insurance,
-   bank:req.body.bank,
-   assets:req.body.assets,
-   social_media:req.body.social_media,
-   file_upload:req.body.file_upload,
-   relative:req.body.relative,
+//    family:req.body.family,
+//    occupation:req.body.occupation,
+//    insurance:req.body.insurance,
+//    bank:req.body.bank,
+//    assets:req.body.assets,
+//    social_media:req.body.social_media,
+//    file_upload:req.body.file_upload,
+//    relative:req.body.relative,
     });
     account
     .save()
@@ -40,18 +42,13 @@ exports.create_account = (req,res,next)=>{
         })
     })
 }
-//========================================================== get
-exports.get_account = (req,res,next)=>{
+// get by specific id ;
+exports.get_One_account = (req,res,next)=>{
+    const {userId} = req.params;
+    console.log(userId)
     Account
-    .find()
-    .populate("family")
-    .populate("occupation")
-    .populate("insurance")
-    .populate("bank")
-    .populate("assets")
-    .populate("social_media")
-    .populate("file_upload")
-    .then(result=>{
+    .findOne({userId})
+    .then( result=>{
         res.status(200).json(result)
     })
     .catch(error=>{
@@ -59,7 +56,28 @@ exports.get_account = (req,res,next)=>{
             error:error
         })
     })
+ 
 }
+//========================================================== get
+// exports.get_account = (req,res,next)=>{
+//     Account
+//     .find()
+//     .populate("family")
+//     .populate("occupation")
+//     .populate("insurance")
+//     .populate("bank")
+//     .populate("assets")
+//     .populate("social_media")
+//     .populate("file_upload")
+//     .then(result=>{
+//         res.status(200).json(result)
+//     })
+//     .catch(error=>{
+//         res.status(400).json({
+//             error:error
+//         })
+//     })
+// }
 //=========================================================== update
 exports.modify_account = (req,res,next)=>{
  let body = {}

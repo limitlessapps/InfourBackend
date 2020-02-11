@@ -1,7 +1,10 @@
 const Family = require("../model/family");
 // ==============================================create
+
 exports.create_family =(req,res,next)=>{
+    const {userId,email}=req.tokenData
  const family = new Family({
+    userId,
     father_firstName:req.body.father_firstName,
     father_surname:req.body.father_surname,
     mother_firstName:req.body.mother_firstName,
@@ -24,13 +27,15 @@ exports.create_family =(req,res,next)=>{
          error:err
      })
  })
-
 }
-//========================================================== get
-exports.get_family = (req,res,next)=>{
+
+//========================================================== get specific
+exports.get_One_family = (req,res,next)=>{
+    const {userId} = req.params;
+    console.log(userId)
     Family
-    .find()
-    .then(result=>{
+    .findOne({userId})
+    .then( result=>{
         res.status(200).json(result)
     })
     .catch(error=>{
@@ -38,7 +43,9 @@ exports.get_family = (req,res,next)=>{
             error:error
         })
     })
+ 
 }
+
 //================================================== update
 exports.modify_family = (req,res,next)=>{
     let body = {}

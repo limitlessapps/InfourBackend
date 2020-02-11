@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const insuranceSchema = new Schema({
+    userId:{
+        type:String
+    },
        insurance_name:{
            type:String
        },
