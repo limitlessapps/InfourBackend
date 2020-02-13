@@ -1,26 +1,28 @@
 const Bank = require("../model/bank");
+const Validation = require("../validation/validation");
 //============================================create
-exports.create_bank_name =(req,res,next)=>{
-    const {userId} = req.tokenData
- const bank = new Bank({
-     userId,
-    bank_name:req.body.bank_name,
- });
+exports.create_bank_name = async (req,res,next)=>{
+   const {bank_name} = req.body;
+   const validationObject = {bank_name};
+   const {userId} = req.tokenData;
+   // validate 
+  const {error } = Validation.onValidateBank(validationObject)
+  if(error) return res.status(400).json({error:error.details[0].message});
+  validationObject.userId =userId
+ //create 
+  let  bank = new Bank(validationObject);
+   try {
+       bank = await bank.save();
+       res.status(201).json(bank)
+   } catch (err) {
+      res.status(400).json(err) 
+   }
 
- bank
- .save()
- .then(result=>{
-     res.status(200).json(result)
- })
- .catch(err=>{
-    res.status(400).json({
-         error:err
-     })
- })
 }
 
 exports.get_One_bank = (req,res,next)=>{
-    const {userId} = req.params;
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id;
     Bank
     .findOne({userId})
     .then( result=>{

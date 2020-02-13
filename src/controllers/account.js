@@ -1,51 +1,69 @@
 const Account = require('../model/account');
+const Validation = require("../validation/validation")
 
-exports.create_account = (req,res,next)=>{
-    const {userId,email}=req.tokenData
- const account = new Account({
-    userId,
-   first_name:req.body.first_name,
-   middle_name:req.body.middle_name,
-   surname:req.body.surname,
-   date_of_birth:req.body.date_of_birth,
-   place_of_birth:req.body.place_of_birth,
-   sex:req.body.sex,
-   nationality:req.body.nationality,
-   id_number:req.body.id_number,
-   martial_status:req.body.martial_status,
-   country:req.body.country,
-   province:req.body.province,
-   district:req.body.district,
-   cell:req.body.cell,
-   village:req.body.village,
-   email:req.body.email,
-   email_work:req.body.email_work,
-   primary_number:req.body.primary_number,
-   secondary_number:req.body.secondary_number,
-//    family:req.body.family,
-//    occupation:req.body.occupation,
-//    insurance:req.body.insurance,
-//    bank:req.body.bank,
-//    assets:req.body.assets,
-//    social_media:req.body.social_media,
-//    file_upload:req.body.file_upload,
-//    relative:req.body.relative,
-    });
-    account
-    .save()
-    .then(result =>{
-        res.status(200).json(result)
-    })
-    .catch(err =>{
-        res.status(400).json({
-            error:err
-        })
-    })
+exports.create_account = async (req,res,next)=>{
+    const {
+        first_name,
+        middle_name,
+        surname,
+        date_of_birth,
+        place_of_birth,
+        sex,
+        nationality,
+        id_number,
+        martial_status,
+        country,
+        province,
+        district,
+        cell,
+        village,
+        email,
+        email_work,
+        primary_number,
+        secondary_number
+    } = req.body;
+
+    const validationObject = {
+        first_name,
+        middle_name,
+        surname,
+        date_of_birth,
+        place_of_birth,
+        sex,
+        nationality,
+        id_number,
+        martial_status,
+        country,
+        province,
+        district,
+        cell,
+        village,
+        email,
+        email_work,
+        primary_number,
+        secondary_number
+    };
+
+ const {userId}=req.tokenData
+ // validate 
+ const { error } = Validation.onValidateAccount(validationObject);
+ if(error) return res.status(400).json({error:error.details[0].message});
+ validationObject.userId = userId;
+ // create 
+let account = new Account(validationObject)
+     try {
+        account = await account.save();
+        console.log(account)
+        res.status(201).json(account)
+     } catch (err) {
+        res.status(400).json(err)  
+     }
+    
 }
 // get by specific userId ;
 exports.get_One_account = (req,res,next)=>{
-    const {userId} = req.params;
-    console.log(userId)
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id;
     Account
     .findOne({userId})
     .then( result=>{
@@ -58,26 +76,7 @@ exports.get_One_account = (req,res,next)=>{
     })
  
 }
-//========================================================== get
-// exports.get_account = (req,res,next)=>{
-//     Account
-//     .find()
-//     .populate("family")
-//     .populate("occupation")
-//     .populate("insurance")
-//     .populate("bank")
-//     .populate("assets")
-//     .populate("social_media")
-//     .populate("file_upload")
-//     .then(result=>{
-//         res.status(200).json(result)
-//     })
-//     .catch(error=>{
-//         res.status(400).json({
-//             error:error
-//         })
-//     })
-// }
+
 //=========================================================== update
 exports.modify_account = (req,res,next)=>{
  let body = {}

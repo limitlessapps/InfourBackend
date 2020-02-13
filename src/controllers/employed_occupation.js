@@ -1,32 +1,36 @@
 const Employed = require("../model/employed_occupation");
+const Validation = require("../validation/validation");
 //========================================================create
-exports.create_employed_occupation =(req,res,next)=>{
+exports.create_employed_occupation =async (req,res,next)=>{
+    const {company_name,position,country,province,district,street} = req.body;
     const {userId} = req.tokenData
- const employed = new Employed({
-     userId,
-    company_name:req.body.company_name,
-    position:req.body.position,
-    country:req.body.country,
-    province:req.body.province,
-    district:req.body.district,
-    street:req.body.street
- });
+    const validationObject = {
+        company_name,
+        position,
+        country,
+        province,
+        district,
+        street
+    }
+    // validate 
+    const {error } = Validation.onValidateEmployed(validationObject)
+  if(error) return res.status(400).json({error:error.details[0].message});
+  validationObject.userId =userId
 
- employed
- .save()
- .then(result=>{
-     res.status(200).json(result)
- })
- .catch(err=>{
-     res.status(400).json({
-         error:err
-     })
- })
+ let employed = new Employed(validationObject);
+ try {
+     employed = await employed.save();
+     res.status(201).json(employed)
+ } catch (error) {
+    res.status(400).json(error) 
+ }
+
 }
 
 // get data by userId 
 exports.get_One_employment = (req,res,next)=>{
-    const {userId} = req.params;
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id;
     Employed
     .findOne({userId})
     .then( result=>{

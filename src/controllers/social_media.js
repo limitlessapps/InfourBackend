@@ -1,32 +1,39 @@
 const Social_media = require("../model/social_media");
+const Validation = require("../validation/validation");
 // ========================================================= create
-exports.create_social_media =(req,res,next)=>{
+exports.create_social_media =async(req,res,next)=>{
+    const {
+        twitter,
+        facebook,
+        instagram,
+        linkedin,
+        whatsup_number
+    } = req.body;
     const {userId} = req.tokenData
- const social_media = new Social_media({
-     userId,
-    twitter:req.body.twitter,
-    facebook:req.body.facebook,
-    instagram:req.body.instagram,
-    linkedin:req.body.linkedin,
-    whatsup_number:req.body.whatsup_number
- });
-
- social_media
- .save()
- .then(result=>{
-     res.status(200).json(result)
- })
- .catch(err=>{
-     res.status(400).json({
-         error:err
-     });
- })
+   const validationObject = {
+    twitter,
+    facebook,
+     instagram,
+    linkedin,
+    whatsup_number
+   }
+   const {error} = Validation.onValidateSocial_media(validationObject);
+   if(error) return res.status(400).json({error:error.details[0].message});
+   validationObject.userId =userId;
+ let social_media = new Social_media(validationObject);
+  try {
+      social_media = await social_media.save();
+      res.status(201).json(social_media)
+  } catch (error) {
+     res.status(400).json(error) 
+  }
 
 }
 //========================================================== get
 
 exports.get_One_social_media = (req,res,next)=>{
-    const {userId} = req.params;
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id;
     Social_media
     .findOne({userId})
     .then( result=>{

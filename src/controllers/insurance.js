@@ -1,32 +1,32 @@
 const Insurance = require("../model/insurance");
+const Validation = require("../validation/validation")
 //================================================== create
-exports.create_insurance =(req,res,next)=>{
-    const {userId,email}=req.tokenData
- const insurance = new Insurance({
-     userId,
-    insurance_name:req.body.insurance_name,
-    insurance_number:req.body.insurance_number,
-    telephone:req.body.telephone,
-    date_of_birth:req.body.date_of_birth,
-    expiration_date:req.body.expiration_date
- });
-
- insurance
- .save()
- .then(result=>{
-     res.status(200).json(result)
- })
- .catch(err=>{
-     res.status(400).json({
-         error:err
-     })
- })
+exports.create_insurance = async (req,res,next)=>{
+    const {insurance_name,insurance_number,telephone,date_of_birth,expiration_date} = req.body
+    const validationObject ={
+        insurance_name,
+        insurance_number,
+        telephone,
+        date_of_birth,
+        expiration_date
+    }
+ const {userId}=req.tokenData
+ const {error} = Validation.onValidateInsurance(validationObject);
+ if(error) return res.status(400).json({error:error.details[0].message});
+ validationObject.userId = userId
+ let insurance = new Insurance(validationObject);
+   try {
+        insurance = await insurance.save();
+       res.status(201).json(insurance);
+   } catch (error) {
+    res.status(400).json(err) 
+   }
 
 }
 //========================================================== get specific
 exports.get_One_Insurance = (req,res,next)=>{
-    const {userId} = req.params;
-    console.log(userId)
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id;
     Insurance
     .findOne({userId})
     .then( result=>{
