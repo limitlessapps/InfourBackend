@@ -1,27 +1,29 @@
 const Assets = require("../model/asset");
+const Validation = require("../validation/validation")
 
 //================================================create
-exports.create_assets =(req,res,next)=>{
+exports.create_assets = async(req,res,next)=>{
+    const { asset_name } = req.body
+    const validationObject = {asset_name}
     const {userId} = req.tokenData;
- const assets = new Assets({
-       userId,
-       asset_name:req.body.asset_name,
- });
- assets
- .save()
- .then(result=>{
-     res.status(200).json(result)
- })
- .catch(err=>{
-     res.status(400).json({
-         error:err
-     });
- })
+    // validdate 
+    const {error} = Validation.onValidateAssets(validationObject)
+    if(error) return res.status(400).json({error:error.details[0].message});
+    validationObject.userId = userId
+    // create 
+ let assets = new Assets(validationObject);
+ try{
+     assets = await assets.save();
+     res.status(201).json(assets)
+ }catch(err) {
+     res.status(400).json(err)
+ }
 
 }
 // get by single id
 exports.get_One_asset = (req,res,next)=>{
-    const {userId} = req.params;
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id;
     Assets
     .findOne({userId})
     .then( result=>{

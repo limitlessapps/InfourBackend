@@ -1,33 +1,42 @@
 const Self_employed = require("../model/self_employed_occupation");
+const Validation = require("../validation/validation");
 // ========================================================= create
-exports.create_self_employed_occupation =(req,res,next)=>{
+exports.create_self_employed_occupation = async(req,res,next)=>{
+    const {
+        business_type,
+        business_name,
+        tin_number,
+        country,
+        province,
+        district,
+        street 
+    }= req.body;
     const {userId} = req.tokenData
- const self_employed = new Self_employed({
-      userId,
-       business_type:req.body.business_type,
-       business_name:req.body.business_name,
-       tin_number:req.body.tin_number,
-       country:req.body.country,
-       province:req.body.province,
-       district:req.body.district,
-       street:req.body.street
+    const validationObject  = {
+        business_type,
+        business_name,
+        tin_number,
+        country,
+        province,
+        district,
+        street
+    }
 
- });
- self_employed
- .save()
- .then(result=>{
-     res.status(200).json(result)
- })
- .catch(err=>{
-     res.status(400).json({
-         error:err
-     })
- })
-
+    const {error}  = Validation.onValidateSelf_employed(validationObject);
+    if(error) return res.status(400).json({error:error.details[0].message});
+    validationObject.userId =userId;
+ let self_employed = new Self_employed(validationObject);
+ try {
+     self_employed = await self_employed.save();
+     res.status(201).json(self_employed);
+ } catch (error) {
+   res.status(400).json(error)  
+ }
 }
 
 exports.get_One_self_employment = (req,res,next)=>{
-    const {userId} = req.params;
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id;
     Self_employed
     .findOne({userId})
     .then( result=>{

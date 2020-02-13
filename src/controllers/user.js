@@ -22,6 +22,7 @@ exports.onRegister = async (req,res,next)=>{
  });
  try{
      const savedUser = await user.save();
+     console.log(user._id)
      const token = jwt.sign(
         {
           email: user.email,
@@ -32,6 +33,7 @@ exports.onRegister = async (req,res,next)=>{
           expiresIn: "1h"
         }
       );
+      console.log(user._id)
      res.status(201).json({
          result:savedUser,
          token:token

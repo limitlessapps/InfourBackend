@@ -1,38 +1,49 @@
 const Family = require("../model/family");
+const Validation = require("../validation/validation");
 // ==============================================create
 
-exports.create_family =(req,res,next)=>{
-    const {userId,email}=req.tokenData
- const family = new Family({
-    userId,
-    father_firstName:req.body.father_firstName,
-    father_surname:req.body.father_surname,
-    mother_firstName:req.body.mother_firstName,
-    mother_SurName:req.body.mother_SurName,
-    spouse_firsName:req.body.spouse_firsName,
-    spouse_Surname:req.body.spouse_Surname,
-    spouseId:req.body.spouseId,
-    spouseTelephone:req.body.spouseTelephone,
-    children:req.body.children,
-    Dependency:req.body.Dependency
- });
-
- family
- .save()
- .then(result=>{
-     res.status(200).json(result)
- })
- .catch(err=>{
-     res.status(400).json({
-         error:err
-     })
- })
+exports.create_family = async (req,res,next)=>{
+    const {
+        father_firstName,
+        father_surname,
+        mother_firstName,
+        mother_SurName,
+        spouse_firstName,
+        spouse_Surname,
+        spouseId,
+        spouseTelephone,
+        children,
+        Dependency
+    } = req.body
+   const validationObject = {
+    father_firstName,
+    father_surname,
+    mother_firstName,
+    mother_SurName,
+    spouse_firstName,
+    spouse_Surname,
+    spouseId,
+    spouseTelephone,
+    children,
+    Dependency
+   }
+const {userId}=req.tokenData
+const {error } = Validation.onValidateFamily(validationObject);
+if(error) return res.status(400).json({error:error.details[0].message});
+validationObject.userId =userId;
+ let family = new Family(validationObject);
+      try {
+          family = await family.save();
+          res.status(201).json(family)
+      } catch (error) {
+        res.status(400) .json(error) 
+      }
 }
 
 //========================================================== get specific
 exports.get_One_family = (req,res,next)=>{
-    const {userId} = req.params;
-    console.log(userId)
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id
     Family
     .findOne({userId})
     .then( result=>{

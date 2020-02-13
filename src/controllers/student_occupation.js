@@ -1,30 +1,34 @@
 const Student = require("../model/student_occupation");
+const Validation = require("../validation/validation");
 //==========================================================create
-exports.create_Student_occupation =(req,res,next)=>{
+exports.create_Student_occupation =async (req,res,next)=>{
+    const {school,country,province,district,street}= req.body
     const {userId} = req.tokenData
- const student = new Student({
-     userId,
-    school:req.body.school,
-    country:req.body.country,
-    province:req.body.province,
-    district:req.body.district,
-    street:req.body.street
- });
- student
- .save()
- .then(result=>{
-     res.status(200).json(result)
- })
- .catch(err=>{
-     res.status(400).json({
-         error:err
-     })
- })
+    const validationObject = {
+        school,
+        country,
+        province,
+        district,
+        street
+    }
+// validate
+const { error } = Validation.onValidateStudent(validationObject);
+if(error) return res.status(400).json({error:error.details[0].message});
+  validationObject.userId =userId
+ let student = new Student(validationObject);
+ console.log(student)
+ try {
+     student = await student.save();
+     res.status(201).json(student);
+ } catch (error) {
+     res.status(400).json(error);
+ }
 
 }
 
 exports.get_One_student = (req,res,next)=>{
-    const {userId} = req.params;
+    let id=req.tokenData? req.tokenData.userId : req.params.userId;
+    const userId=id;
     Student
     .findOne({userId})
     .then( result=>{
